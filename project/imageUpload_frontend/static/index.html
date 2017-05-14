@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="utf-8">
+    <script src="node_modules/angular/angular.js"></script>
+    <script src="node_modules/angular-resource/angular-resource.js"></script>
+    <script src="js/filesModelDirective.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/images_rest.js"></script>
+    
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+</head>
+<body>
+    <div class="container" ng-app="imageuploadFrontendApp" ng-controller="MainCtrl">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h4>Choose a image to upload</h4>
+            </div>
+            <div class="panel-body">
+                <form class="form" name="form" ng-submit="uploadImage()">
+                    <input type="file" files-model="newImage.image"></br>
+                    <button class="btn btn-primary" type="submit"><span class="glyphicon glyphicon-send" aria-hidden="true"></span> Upload</button>
+                </form>
+            </div>
+        </div>
+        <div ng-if="images.length == 0">
+            There are no images available yet. How about uploading one?
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4" ng-repeat="image in images track by image.pk">
+                <div class="well well-sm">
+                    <img ng-src="{{ image.image }}" class="img-responsive" style="min-height:8; max-height:8;">
+                    <h3>image {{image.pk}}<button class="btn btn-danger pull-right" ng-click="deleteImage(image)"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Delete</button></h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<html>
